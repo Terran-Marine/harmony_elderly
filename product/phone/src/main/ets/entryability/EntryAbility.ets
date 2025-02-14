@@ -2,7 +2,7 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
 import "../utils";
 import { Log } from '@abner/log';
-import { Http } from '@hm/basic';
+import { Http, RouterConfig } from '@hm/basic';
 
 interface ParamsType {
   pageNum: number,
@@ -38,7 +38,7 @@ export default class EntryAbility extends UIAbility {
     //加载广告页
     const adWin = await windowStage.createSubWindow("ad_window")
     await adWin.showWindow()
-    adWin.setUIContent("@bundle:com.gj.elderly/home/ets/pages/Splash/Splash")
+    adWin.setUIContent(RouterConfig.SPLASH_URL)
 
     windowStage.loadContent('pages/Index', (err, data) => {
       if (err.code) {

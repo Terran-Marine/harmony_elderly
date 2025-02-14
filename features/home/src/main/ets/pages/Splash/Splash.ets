@@ -1,5 +1,5 @@
 import { ResManager } from '@hm/basic/Index'
-import { router } from '@kit.ArkUI'
+import { window } from '@kit.ArkUI'
 
 @Entry
 @Component
@@ -15,9 +15,7 @@ struct Splash {
       this.count--
       if (this.count === 0) {
         clearInterval(this.timer)
-        router.pushUrl({
-          url: 'pages/Index'
-        })
+        window.findWindow("ad_window").destroyWindow()
       }
     }, 1000)
   }
