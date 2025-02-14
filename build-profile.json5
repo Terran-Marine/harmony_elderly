@@ -1,0 +1,133 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\GJ\\.ohos\\config\\default_yikang-elder-care-template_4DpYNe82_5nPg0FmPDQ-Je7XPep1lVfxR8v4_v0d2DE=.cer",
+          "storePassword": "0000001B31A3BD4CF58F2648140FCBE8BAB2798CB1E7A3003D054925E34A390FF2EDF1E85793EF80AB0B6C",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BAAA7F06D67170AC21D1986F473CB7800CDDEE5C654A0AD8BC2732BCC74152E2436C6A605595CDD",
+          "profile": "C:\\Users\\GJ\\.ohos\\config\\default_yikang-elder-care-template_4DpYNe82_5nPg0FmPDQ-Je7XPep1lVfxR8v4_v0d2DE=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\GJ\\.ohos\\config\\default_yikang-elder-care-template_4DpYNe82_5nPg0FmPDQ-Je7XPep1lVfxR8v4_v0d2DE=.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS"
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "phone",
+      "srcPath": "./product/phone",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "basic",
+      "srcPath": "./common/basic",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "home",
+      "srcPath": "./features/home",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "duty",
+      "srcPath": "./features/duty",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "stage",
+      "srcPath": "./features/stage",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mine",
+      "srcPath": "./features/mine",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "message",
+      "srcPath": "./features/message",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "device",
+      "srcPath": "./features/device",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
