@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\GJ\\.ohos\\config\\default_yikang-elder-care-template_4DpYNe82_5nPg0FmPDQ-Je7XPep1lVfxR8v4_v0d2DE=.cer",
-          "storePassword": "0000001B31A3BD4CF58F2648140FCBE8BAB2798CB1E7A3003D054925E34A390FF2EDF1E85793EF80AB0B6C",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001BAAA7F06D67170AC21D1986F473CB7800CDDEE5C654A0AD8BC2732BCC74152E2436C6A605595CDD",
-          "profile": "C:\\Users\\GJ\\.ohos\\config\\default_yikang-elder-care-template_4DpYNe82_5nPg0FmPDQ-Je7XPep1lVfxR8v4_v0d2DE=.p7b",
+          "storePassword": "0000001C1D1D969769258838C3E5714044DC5BD53B8FFB649264F47D645BF9C3B49B73C31DC8F6C22789FBCB",
+          "certpath": "C:/Users/GJ/DevEcoStudioProjects/yikang-elder-care-template/hmyl.cer",
+          "keyAlias": "hmyl",
+          "keyPassword": "0000001C5B272BC83810B0AD2BDF5CF22A861CBC54099C0E2B0A55FBAC663F105779904ACADB15995CC7E5ED",
+          "profile": "C:/Users/GJ/DevEcoStudioProjects/yikang-elder-care-template/hmylDebug.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\GJ\\.ohos\\config\\default_yikang-elder-care-template_4DpYNe82_5nPg0FmPDQ-Je7XPep1lVfxR8v4_v0d2DE=.p12"
+          "storeFile": "C:/Users/GJ/DevEcoStudioProjects/yikang-elder-care-template/hmyl.p12"
         }
       }
     ],

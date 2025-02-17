@@ -2,7 +2,7 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
 import "../utils";
 import { Log } from '@abner/log';
-import { Http, RouterConfig } from '@hm/basic';
+import { Http, RouterConfig, UserAuthStoreInstance } from '@hm/basic';
 
 interface ParamsType {
   pageNum: number,
@@ -35,18 +35,32 @@ export default class EntryAbility extends UIAbility {
     // Main window is created, set main page for this ability
     Log.info("EntryAbility onWindowStageCreate");
 
-    //加载广告页
+    UserAuthStoreInstance.context = this.context
+
     const adWin = await windowStage.createSubWindow("ad_window")
     await adWin.showWindow()
     adWin.setUIContent(RouterConfig.SPLASH_URL)
 
-    windowStage.loadContent('pages/Index', (err, data) => {
-      if (err.code) {
-        Log.error(`EntryAbility Failed to load the content. ${JSON.stringify(err)}`)
-        return;
-      }
-      Log.info(`EntryAbility Succeeded in loading the content. ${JSON.stringify(err)}`)
-    });
+    const token = await UserAuthStoreInstance.getUser()
+
+    Log.info(`token : ${token}`)
+
+    if (token) {
+      //加载广告页
+
+
+      windowStage.loadContent('pages/Index', (err, data) => {
+        if (err.code) {
+          Log.error(`EntryAbility Failed to load the content. ${JSON.stringify(err)}`)
+          return;
+        }
+        Log.info(`EntryAbility Succeeded in loading the content. ${JSON.stringify(err)}`)
+      });
+    } else {
+      windowStage.loadContent(RouterConfig.LOGIN_URL)
+    }
+
+
   }
 
   onWindowStageDestroy(): void {

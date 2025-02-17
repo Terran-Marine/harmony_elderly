@@ -12,16 +12,16 @@ class UserAuthStore {
   }
 
   //设置
-  async getUser(token: string) {
+  async setUser(token: string) {
     const store = this.getStore()
     await store.put(this.USER_STORE, token)
     await store.flush()
   }
 
   //获取
-  async setUser() {
+  async getUser() {
     const store = this.getStore()
-    return await store.get(this.USER_STORE, "")
+    return await store.get(this.USER_STORE, "") as string
   }
 
   //删除
