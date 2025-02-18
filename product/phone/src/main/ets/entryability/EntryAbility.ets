@@ -2,7 +2,7 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
 import "../utils";
 import { Log } from '@abner/log';
-import { Http, RouterConfig, UserAuthStoreInstance } from '@hm/basic';
+import { RouterConfig, UserAuthStoreInstance, WXApi, WXEventHandler } from '@hm/basic';
 
 interface ParamsType {
   pageNum: number,
@@ -14,17 +14,23 @@ export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     Log.info("EntryAbility onCreate");
 
-    const params: ParamsType = {
-      pageNum: 1, pageSize: 10
-    }
+    // const params: ParamsType = {
+    //   pageNum: 1, pageSize: 10
+    // }
+    //
+    // Http.get<null>("/employee/nursing-task/pageQuery", params)
+    //   .then((response: null) => {
+    //     AlertDialog.show({
+    //       message: JSON.stringify(response, null, 2)
+    //     })
+    //   })
 
-    Http.get<null>("/employee/nursing-task/pageQuery", params)
-      .then((response: null) => {
-        AlertDialog.show({
-          message: JSON.stringify(response, null, 2)
-        })
-      })
+    this.handleWeChatCallIfNeed(want)
 
+  }
+
+  onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    this.handleWeChatCallIfNeed(want)
   }
 
   onDestroy(): void {
@@ -76,5 +82,10 @@ export default class EntryAbility extends UIAbility {
   onBackground(): void {
     // Ability has back to background
     Log.info("EntryAbility onBackground");
+  }
+
+
+  private handleWeChatCallIfNeed(want: Want) {
+    WXApi.handleWant(want, WXEventHandler)
   }
 }

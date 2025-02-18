@@ -10,7 +10,8 @@
     "@ohos/axios": "^2.2.0",
     "@abner/log": "^1.0.3",
     "dayjs": "^1.11.7",
-    "@itheima/wing-care": "^1.0.2"
+    "@itheima/wing-care": "^1.0.2",
+    "@tencent/wechat_open_sdk": "1.0.0"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.15",

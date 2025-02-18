@@ -1,5 +1,6 @@
 {
   "app": {
+//    "bundleName": "com.gj.elderly",
     "bundleName": "com.gj.elderly",
     "vendor": "example",
     "versionCode": 1000000,
