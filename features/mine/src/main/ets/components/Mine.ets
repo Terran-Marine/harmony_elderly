@@ -1,5 +1,5 @@
 import router from '@ohos.router'
-import { ResManager } from '@hm/basic/Index'
+import { DeviceLayoutBuilder, ResManager } from '@hm/basic/Index'
 
 @Component
 export struct Mine {
@@ -75,23 +75,24 @@ export struct Mine {
           // Image($r('app.media.ic_arrow_black'))
           //   .width(7)
           //   .height(16)
+
+
         }
         .width('100%')
 
+        Blank()
+          .height(ResManager.EC_CONTENT_SPACE)
+          .width(`100%`)
         // 导航：设备管理
-        Row({ space: 10 }) {
-
-        }
-        .width('100%')
-        .justifyContent(FlexAlign.SpaceBetween)
-
+        DeviceLayoutBuilder()
       }
       .margin({ top: -80, left: ResManager.EC_CONTENT_SPACE, right: ResManager.EC_CONTENT_SPACE })
       // .width('100%')
       .padding({
         top: ResManager.EC_CONTENT_SPACE,
         left: ResManager.EC_CONTENT_SPACE,
-        right: ResManager.EC_CONTENT_SPACE
+        right: ResManager.EC_CONTENT_SPACE,
+        bottom: ResManager.EC_CONTENT_SPACE
       })
       .backgroundColor('rgba(255,255,255, 0.6)')
       .borderRadius(ResManager.EC_NORMAL_RD)
