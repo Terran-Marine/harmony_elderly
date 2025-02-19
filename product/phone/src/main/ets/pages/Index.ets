@@ -75,7 +75,8 @@ struct Index {
       })
     }
     .barPosition(BarPosition.End)
-    .barBackgroundColor('#fff')
-    .padding({ bottom: this.bottomHeight })
+    .barBackgroundColor(Color.White)
+
+    // .padding({ bottom: this.bottomHeight })
   }
 }

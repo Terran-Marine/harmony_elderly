@@ -26,7 +26,6 @@ export default class EntryAbility extends UIAbility {
     //   })
 
     this.handleWeChatCallIfNeed(want)
-
   }
 
   onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
@@ -42,7 +41,7 @@ export default class EntryAbility extends UIAbility {
     Log.info("EntryAbility onWindowStageCreate");
 
     UserAuthStoreInstance.context = this.context
-
+    //加载广告页
     const adWin = await windowStage.createSubWindow("ad_window")
     await adWin.showWindow()
     adWin.setUIContent(RouterConfig.SPLASH_URL)
@@ -52,8 +51,6 @@ export default class EntryAbility extends UIAbility {
     Log.info(`token : ${token}`)
 
     if (token) {
-      //加载广告页
-
 
       windowStage.loadContent('pages/Index', (err, data) => {
         if (err.code) {

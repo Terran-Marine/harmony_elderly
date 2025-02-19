@@ -1,4 +1,4 @@
-import { LoginParamsModel } from '../model/User';
+import { LoginParamsModel, UserInfoModel } from '../model/User';
 import { Http } from '../utils/Request';
 
 
@@ -7,4 +7,12 @@ import { Http } from '../utils/Request';
  * */
 export const loginApi = (data: LoginParamsModel): Promise<string> => {
   return Http.post("/employee/login", data)
+}
+
+
+/**
+ * 获取用户信息
+ * */
+export const getUserInfoApi = (): Promise<UserInfoModel> => {
+  return Http.get<UserInfoModel>("/employee/user")
 }

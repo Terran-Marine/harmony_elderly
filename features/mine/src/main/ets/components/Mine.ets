@@ -1,10 +1,26 @@
 import router from '@ohos.router'
-import { DeviceLayoutBuilder, ResManager } from '@hm/basic/Index'
+import { DeviceLayoutBuilder, getUserInfoApi, ResManager, RouterConfig, UserInfoModel } from '@hm/basic/Index'
+import { Log } from '@abner/log'
 
 @Component
 export struct Mine {
   @StorageProp('topHeight')
   topHeight: number = 0
+  @State
+  userInfo: UserInfoModel = {} as UserInfoModel
+
+  aboutToAppear(): void {
+    this.getUserInfo()
+  }
+
+  async getUserInfo() {
+    try {
+      this.userInfo = await getUserInfoApi()
+      Log.info(`userInfo ${JSON.stringify(this.userInfo)}`)
+    } catch (e) {
+      Log.error(e)
+    }
+  }
 
   @Builder
   cellItem(title: string, url: string = '') {
@@ -38,7 +54,8 @@ export struct Mine {
           .padding({ top: this.topHeight })
         // 个人信息
         Column({ space: 5 }) {
-          Image('https://bkimg.cdn.bcebos.com/pic/8c1001e93901213fb80eea5d87b021d12f2eb8383fa0?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080')
+          Image(this.userInfo.avatar ||
+            'https://bkimg.cdn.bcebos.com/pic/8c1001e93901213fb80eea5d87b021d12f2eb8383fa0?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080')
             .width(74)
             .aspectRatio(1)
             .borderRadius(37)
@@ -49,16 +66,19 @@ export struct Mine {
               radius: 21,
               color: '#0aa9941f'
             })
-          Text('许家印')
+          Text(this.userInfo.nickName || '许家印')
             .fontSize(ResManager.EC_PAGE_TITLE_FS)
             .fontColor(ResManager.EC_MID_BLACK)
             .fontWeight(500)
-          Text('GJ@NN.com')
+          Text(this.userInfo.username || 'GJ@NN.com')
             .fontSize(13)
             .fontColor(ResManager.EC_MID_59)
 
         }
         .margin({ top: 64 - this.topHeight })
+        .onClick(() => {
+          router.pushUrl({ url: RouterConfig.USER_SET_URL })
+        })
       }
       .width('100%')
       .height(330)
@@ -101,7 +121,7 @@ export struct Mine {
       Column() {
         List() {
           ListItem() {
-            this.cellItem('我的消息', 'pages/message/MsgPage')
+            this.cellItem('我的消息', RouterConfig.USER_MSG_URL)
           }
         }
         .width('100%')
@@ -127,8 +147,9 @@ export struct Mine {
         .borderRadius(28)
         .backgroundColor('#fff')
         .margin({ top: 50 })
-
-
+        .onClick(() => {
+          // featureAbility.terminateSelf(); // 退出应用
+        })
     }
     .width('100%')
     .height('100%')

@@ -7,7 +7,7 @@ struct Splash {
   @StorageProp('bottomHeight')
   bottomHeight: number = 0
   @State
-  count: number = 6
+  count: number = 1
   timer: number = -1
 
   countdown() {
@@ -52,7 +52,6 @@ struct Splash {
       .justifyContent(FlexAlign.Center)
       .backgroundColor('#fff')
       .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
-
     }
     .width('100%')
     .height('100%')
