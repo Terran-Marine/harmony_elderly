@@ -16,26 +16,21 @@ export interface LoginParamsModel {
 }
 
 
-export interface UserInfoModel {
+export class UserInfoModel {
   /**
    * 头像
    */
-  avatar: null | string;
-
+  avatar: null | string = "";
   /**
    * 用户id
    */
-  id: string;
-
+  id: string = "";
   /**
    * 用户昵称
    */
-  nickName: string;
-
+  nickName: string = "";
   /**
    * 用户账号，即邮箱
    */
-  username: string;
-
-
+  username: string = "";
 }

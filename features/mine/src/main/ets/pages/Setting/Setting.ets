@@ -1,5 +1,7 @@
 import router from '@ohos.router'
-import { EcDialogUpload, ResManager } from '@hm/basic/Index'
+import { EcDialogUpload, getUserInfoApi, ResManager, RouterConfig, UserInfoModel } from '@hm/basic/Index'
+import { Log } from '@abner/log'
+import { fileIo } from '@kit.CoreFileKit'
 
 
 @Entry
@@ -10,9 +12,55 @@ struct Setting {
   // 上传弹层控制
   uploadDialog: CustomDialogController = new CustomDialogController({
     // 使用自定义弹层组件
-    builder: EcDialogUpload({}),
+    builder: EcDialogUpload({
+      callback: (url: string) => {
+        this.photoUpload(url)
+      }
+    }),
     alignment: DialogAlignment.Bottom
   })
+  @State
+  userInfo: UserInfoModel = {} as UserInfoModel
+
+  async photoUpload(url: string) {
+    try {
+      const imageFile = fileIo.openSync(url, fileIo.OpenMode.READ_ONLY)
+
+      const appImageFile = `${getContext().cacheDir}/${imageFile.name}`
+
+      fileIo.copyFileSync(imageFile.fd, appImageFile)
+
+
+      Log.info(`photoUpload : ${appImageFile}`)
+      this.userInfo = {
+        avatar: `${appImageFile}`
+      } as UserInfoModel
+
+      // const formData = new FormData()
+      // formData.append("file", `internal://${appImageFile}`)
+      //
+      // const res = await UploadApi(formData)
+      //
+      // AlertDialog.show({ message: res })
+
+
+    } catch (e) {
+      Log.error(e)
+    }
+  }
+
+  aboutToAppear(): void {
+    this.getUserInfo()
+  }
+
+  async getUserInfo() {
+    try {
+      this.userInfo = await getUserInfoApi()
+      Log.info(`userInfo ${JSON.stringify(this.userInfo)}`)
+    } catch (e) {
+      Log.error(e)
+    }
+  }
 
   @Builder
   cellItem(title: string, rightContent: string = '') {
@@ -27,20 +75,19 @@ struct Setting {
           Text(rightContent)
             .fontColor(ResManager.EC_MID_59)
             .fontSize(ResManager.EC_NORMAL_FS)
-            .onClick(() => {
-              router.pushUrl({
-                url: 'pages/mine/NickNamePage'
-              })
-            })
         } else {
           // 上传
-          Image('https://img2.baidu.com/it/u=130573784,2479509663&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=534')
+          Image(this.userInfo.avatar ||
+            'https://bkimg.cdn.bcebos.com/pic/8c1001e93901213fb80eea5d87b021d12f2eb8383fa0?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080')
             .width(34)
             .aspectRatio(1)
             .borderRadius(17)
-            .onClick(() => {
-              this.uploadDialog.open()
-            })
+
+          // Image("/data/storage/el2/base/haps/phone/cache/medal_save.png")
+          //   .width(34)
+          //   .aspectRatio(1)
+          //   .borderRadius(17)
+
         }
         Image($r('app.media.ic_arrow_black'))
           .width(7)
@@ -50,6 +97,15 @@ struct Setting {
     .width('100%')
     .padding({ top: 14, bottom: 14 })
     .justifyContent(FlexAlign.SpaceBetween)
+    .onClick(() => {
+      if (rightContent) {
+        router.pushUrl({
+          url: RouterConfig.USER_NAME_URL
+        })
+      } else {
+        this.uploadDialog.open()
+      }
+    })
   }
 
   build() {
@@ -62,7 +118,7 @@ struct Setting {
             }
 
             ListItem() {
-              this.cellItem('昵称', '思密达')
+              this.cellItem('昵称', this.userInfo.nickName || '许家印')
             }
           }
           .width('100%')
@@ -88,3 +144,4 @@ struct Setting {
     .titleMode(NavigationTitleMode.Mini)
   }
 }
+
