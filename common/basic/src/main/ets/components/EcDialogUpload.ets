@@ -19,7 +19,7 @@ export struct EcDialogUpload {
         cameraPosition: camera.CameraPosition.CAMERA_POSITION_BACK
       };
       let pickerResult: picker.PickerResult = await picker.pick(getContext(),
-        [picker.PickerMediaType.PHOTO, picker.PickerMediaType.VIDEO], pickerProfile);
+        [picker.PickerMediaType.PHOTO], pickerProfile);
       Log.info("the pick pickerResult is:" + JSON.stringify(pickerResult));
       this.callback(pickerResult.resultUri)
 

@@ -1,6 +1,8 @@
-import router from '@ohos.router'
-import { DeviceLayoutBuilder, getUserInfoApi, ResManager, RouterConfig, UserInfoModel } from '@hm/basic/Index'
-import { Log } from '@abner/log'
+import router from '@ohos.router';
+import { DeviceLayoutBuilder, getUserInfoApi, ResManager, RouterConfig, UserInfoModel } from '@hm/basic/Index';
+import { Log } from '@abner/log';
+import { Want } from '@kit.AbilityKit';
+import { vpnExtension } from '@kit.NetworkKit';
 
 @Component
 export struct Mine {
@@ -138,6 +140,29 @@ export struct Mine {
       .backgroundColor('#fff')
       .borderRadius(ResManager.EC_NORMAL_RD)
 
+
+      Button(
+        'VPN'
+      )
+        .fontColor(ResManager.EC_MID_19)
+        .width(230)
+        .height(40)
+        .borderRadius(28)
+        .backgroundColor('#fff')
+        .margin({ top: 50 })
+        .onClick(() => {
+          // featureAbility.terminateSelf(); // 退出应用
+
+          let want: Want = {
+            deviceId: "",
+            bundleName: "com.gj.elderly",
+            abilityName: "MyVpnExtAbility",
+          };
+
+          vpnExtension.startVpnExtensionAbility(want);
+          Log.info("startVpnExtensionAbility")
+        })
+
       Button(
         '退出'
       )
@@ -146,7 +171,7 @@ export struct Mine {
         .height(40)
         .borderRadius(28)
         .backgroundColor('#fff')
-        .margin({ top: 50 })
+        .margin({ top: 20 })
         .onClick(() => {
           // featureAbility.terminateSelf(); // 退出应用
         })
